@@ -11,12 +11,26 @@ var App = React.createClass({
     render() {
         return (
             <div>
-                <input type="text" onChange={this.update}/>
-                <h1>{this.state.txt}</h1>
+                <Widget txt={this.state.txt} update={this.update} />
+                <Widget txt={this.state.txt} update={this.update} />
+                <Widget txt={this.state.txt} update={this.update} />
+                <Widget txt={this.state.txt} update={this.update} />
             </div>
         );
     }
 });
+
+var Widget = React.createClass({
+  render() {
+      return (
+          <div>
+              <input type="text" onChange={this.props.update}/>
+              <h1>{this.props.txt}</h1>
+          </div>
+      );
+  }
+});
+
 
 Meteor.startup(function () {
     React.render(<App/>, document.body);
