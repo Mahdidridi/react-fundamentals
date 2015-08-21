@@ -1,33 +1,41 @@
 var App = React.createClass({
-    getInitialState() {
-      return {
-        txt:'this stat txt ',
-        id: 0
-      };
-    },
-    update: function(e){
-        this.setState({txt: e.target.value})
-    },
-    render() {
-        return (
-            <div>
-                <Widget txt={this.state.txt} update={this.update} />
-                <Widget txt={this.state.txt} update={this.update} />
-                <Widget txt={this.state.txt} update={this.update} />
-                <Widget txt={this.state.txt} update={this.update} />
-            </div>
-        );
+  getInitialState:function(){
+    return {
+      red: 0,
+      green: 0,
+      blue: 0
     }
+  },
+  update: function(){
+    this.setState({
+      red:this.refs.red.refs.inp.getDOMNode().value,
+      green:this.refs.green.refs.inp.getDOMNode().value,
+      blue:this.refs.blue.refs.inp.getDOMNode().value
+    });
+  },
+  render:function(){
+    return (
+      <div>
+        <Slider ref="red" update={this.update} />
+        <label>{this.state.red}</label>
+        <Slider ref="green" update={this.update} />
+        <label>{this.state.green}</label>
+        <Slider ref="blue" update={this.update} />
+        <label>{this.state.blue}</label>
+      </div>
+      );
+
+  }
 });
 
-var Widget = React.createClass({
-  render() {
-      return (
-          <div>
-              <input type="text" onChange={this.props.update}/>
-              <h1>{this.props.txt}</h1>
-          </div>
+var Slider = React.createClass({
+  render:function(){
+    return (
+        <div>
+        <input ref="inp" type="range" min="0" max="255" onChange={this.props.update} />
+        </div>
       );
+
   }
 });
 
